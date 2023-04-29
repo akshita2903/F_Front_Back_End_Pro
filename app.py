@@ -38,6 +38,7 @@ def predict():
         'self_employed': request.args.get('self_employed'),
         'treatment': request.args.get('treatment'),
         'work_interfere': request.args.get('work_interfere'),
+        'benefits':request.args.get('Benefits')
     }
 
     
@@ -45,7 +46,7 @@ def predict():
     df = pd.DataFrame(columns = ['Age','Gender','family_history'
                                  ,'benefits', 'care_options', 'anonymity','leave', 'work_interfere'])# Add records to dataframe using the .loc functiondf.loc[0] = [2014,"toyota","corolla"] 
     df.loc[0] = [float(form_values['age']), int(form_values['gender']), int(form_values['family_history'])
-                 ,2, 1, 0, 0, int(form_values['work_interfere'])] 
+                 ,int(form_values('benefits')), 1, 0, 0, int(form_values['work_interfere'])] 
     # gend = df.at[0, 'Age']
     # print(type(gend))
     # print("various data types are:")
@@ -54,6 +55,11 @@ def predict():
     prediction = model.predict(df)
    
     print("prediction result is " ,prediction)
+    if int(prediction) == 1:
+        prediction="Treatment Require"
+    else:
+        prediction="You are fine"    
+        
     #print the form values by sending the form data to result.html
     return render_template('result.html', values = form_values, result=prediction)
     
