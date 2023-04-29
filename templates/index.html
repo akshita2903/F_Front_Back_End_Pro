@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mental health predictor</title>
+	<link rel="stylesheet" href="../static/index.css">
+</head>
+<body >
+	<h3 >MENTAL PREDICTION MODEL</h3>
+
+	<div>
+		<img src="{{url_for('static', filename='bg.png')}}" align=middle alt="background image"/>
+		<form action="/predict" style=" font-size: medium; font-weight: bold;" >
+			<h4 style="font-size:25px; color:bisque">Enter Your Age</h4>
+			<label for="age" style="font-size:19px ;color:rgb(186, 238, 221)">Age</label>
+			<select id="age" class="age" name="age">
+				<option value="0">0-20</option>
+				<option value="21">21-30</option>
+				<option value="31"> 31-65</option>
+				<option value="66">66-100</option>
+			</select>
+			<!-- <input type="text" id="age" name="age"> -->
+			<br>
+			<h4 style="font-size:25px; color:bisque">Select Your Gender</h4>
+			<label for="gender_class" style="font-size:19px ;color:rgb(186, 238, 221)">Gender</label>
+			<select id="gender_class" class="gender_class" name="gender">
+			<option value="M">Male</option>
+			<option value="F">Female</option>
+			<option value="T">Trans</option>
+			
+			</select>
+			<br>
+			<h4 style="font-size:25px;color:bisque">Do you have a family history of mental illness ?</h4>
+			<label for="family_history" style="font-size:19px ;color:rgb(186, 238, 221)">Family_History</label>
+			<select id="family_history" name="family_history">
+			<option value="Y">Yes</option>
+			<option value="N">No</option>
+
+			
+			</select>
+			<br>
+			<h4 style="font-size:25px;color:bisque"> Are you self Employed ?</h4>
+			<label for="self_employed" style="font-size:19px ;color:rgb(186, 238, 221)">Self_Employed</label>
+			<select id="self_employed" name="self_employed">
+			<option value="Y">Yes</option>
+			<option value="N">No</option>
+			
+			</select>
+			<br>
+			<h4 style="font-size:25px;color:bisque">Have you sought treatment for a mental health condition ?</h4>
+			<label for="treatment" style="font-size:19px ;color:rgb(186, 238, 221)">treatment</label>
+			<select id="treatment" name="treatment">
+			<option value="y">Yes</option>
+			<option value="n">No</option>
+			
+			</select>
+			<br>
+			<h4 style="font-size:25px;color:bisque"> If you have a mental health condition, do you feel that it interferes with your work ?</h4>
+			<label for="work_interfere" style="font-size:19px ;color:rgb(186, 238, 221)">work_interfere</label>
+			<select id="work_interfere" name="work_interfere">
+			<option value="never">Never</option>
+			<option value="rarely">Rarely</option>
+			<option value="often">Often</option>
+			<option value="Sometimes">Sometimes</option>
+			
+			</select>
+			<br>
+			<br>
+			<input type="submit" value="Submit" style="color:aquamarine; font-size:15px; padding:10px 10px;background-color: darkslateblue;">
+		</form>
+
+		<p>{{prediction}}</p>
+	</div>
+</body>
+</html>
