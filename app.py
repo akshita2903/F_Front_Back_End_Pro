@@ -9,8 +9,11 @@ model=pickle.load(open('trained_model.pkl' , 'rb'))
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('home.html')
    
+@app.route('/ques')   
+def ques():
+    return render_template('index.html')
 
 @app.route('/predict')
 def predict():
@@ -35,31 +38,29 @@ def predict():
         'age': request.args.get('age'),
         'gender' : request.args.get('gender'),
         'family_history' : request.args.get('family_history'),
-        'self_employed': request.args.get('self_employed'),
-        'treatment': request.args.get('treatment'),
-        'work_interfere': request.args.get('work_interfere'),
-        'benefits':request.args.get('Benefits')
+        'benefits': request.args.get('benefits'),
+        'care_options': request.args.get('care_options'),
+        # 'self_employed': request.args.get('self_employed'),
+        'anonymity': request.args.get('anonymity'),
+        'leave': request.args.get('leave'),
+        'work_interfere':request.args.get('work_interfere')
     }
 
     
     print("model is ",model)
     df = pd.DataFrame(columns = ['Age','Gender','family_history'
                                  ,'benefits', 'care_options', 'anonymity','leave', 'work_interfere'])# Add records to dataframe using the .loc functiondf.loc[0] = [2014,"toyota","corolla"] 
-    df.loc[0] = [float(form_values['age']), int(form_values['gender']), int(form_values['family_history'])
-                 ,int(form_values('benefits')), 1, 0, 0, int(form_values['work_interfere'])] 
-    # gend = df.at[0, 'Age']
-    # print(type(gend))
-    # print("various data types are:")
-    # print(df.dtypes)
-    # df.loc[0] = [0.340909, 1, 1, 2, 1, 0, 0 ,4]
+    df.loc[0] = [float(form_values['age']), int(form_values['gender']), int(form_values['family_history']),
+                 int(form_values['benefits']), int(form_values['care_options']),
+                  int(form_values['anonymity']) ,int(form_values['leave']),int(form_values['work_interfere'])] 
+    
     prediction = model.predict(df)
-   
-    print("prediction result is " ,prediction)
-    if int(prediction) == 1:
-        prediction="Treatment Require"
+    if int(prediction)==1:
+        prediction = "You may require to see a mental health specialist"
     else:
-        prediction="You are fine"    
+        prediction = "You are good to go. No need to worry about your mental health"
         
+    print("prediction result is " ,prediction)
     #print the form values by sending the form data to result.html
     return render_template('result.html', values = form_values, result=prediction)
     
@@ -67,7 +68,7 @@ def predict():
     # return render_template('index.html',prediction=result)
 
 
-if __name__=="__main__":
+if __name__=="main_":
     app.run(debug=True)
 
 
@@ -79,7 +80,7 @@ if __name__=="__main__":
 # from flask import Flask, request,jsonify, render_template
 # import pickle
 
-# app=Flask(__name__)
+# app=Flask(_name_)
 
 
 # def ValuePredictor(to_predict_list):
@@ -115,13 +116,6 @@ if __name__=="__main__":
 #             prediction="You are fine"
 #      return render_template('index.html' , prediction=prediction)    
 
-# if __name__=="__main__":
+# if _name=="main_":
 #       app.run(debug=True)
 #       print("hello")
-
-
-
-
-
-
-
